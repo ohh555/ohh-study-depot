@@ -1,0 +1,33 @@
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+div,
+ol,
+ul,
+li,
+body,
+input,
+textarea {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+ul,
+li,
+ol {
+  list-style: none;
+}
+
+em,
+i {
+  font-style: normal;
+}
