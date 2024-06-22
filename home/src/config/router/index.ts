@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import HomeView from '../views/HomeView.vue';
+import HomeView from '@/views/HomeView.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/', // 首页
+    path: '/home', // 首页
     name: 'home',
     component: HomeView
   },
