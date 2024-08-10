@@ -17,6 +17,7 @@
                 v-model="userMessage.username" 
                 clearable
                 placeholder="自己的名字(真实姓名)"
+                size="large"
               />
             </el-form-item>
             <el-form-item prop="userpass">
@@ -26,6 +27,7 @@
                 clearable 
                 show-password
                 placeholder="自己的生日(8位哦)"
+                size="large"
               />
             </el-form-item>
             <el-form-item style="margin-top:30px">
@@ -34,9 +36,9 @@
             </el-form-item>
           </el-form>
         </div>
-        <div class="LoginView__container__content__canvas">
+        <!-- <div class="LoginView__container__content__canvas">
           <VerificationCode/>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -44,15 +46,18 @@
 
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
-import type { FormProps, FormRules } from 'element-plus'
 import router from '@/config/router/index';
-import VerificationCode from './components/VerificationCode.vue';
+import { useCounterStore } from '@/store/pinia';
+import type { FormProps, FormRules } from 'element-plus'
+// import VerificationCode from './components/VerificationCode.vue';
 
 const labelPosition = ref<FormProps['labelPosition']>('top')// 定义输入框位置
 const userMessage = reactive({// 定义输入框存储位置
   username: '',
   userpass: '',
 })
+
+const counterStore = useCounterStore();
 
 const validatePass = (rule: any, value: any, callback: any) => {
   console.log(rule)
@@ -92,14 +97,15 @@ const rules = reactive<FormRules<typeof userMessage>>({
 const onSubmit = (bool: Boolean) => {
   // 登录判断，当bool值为false时，直接跳转页面
   if (!bool) {
+    counterStore.token = bool;
+    console.log('游客',counterStore.token);
+    
     router.push({
-      path: '/home',
-      query: {
-        bool: bool
-      }
+      path: '/home'
     })
   } else {
-
+    counterStore.token = bool;
+    console.log('自己',counterStore.token);
   }
 }
 </script>
